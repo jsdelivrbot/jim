@@ -1,0 +1,24 @@
+{
+  "name": "noc",
+  "version": "0.2.0",
+  "description": "Application for creating NOC",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "express": "^4.13.3"
+  },
+  "engines": {
+    "node": "4.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/rysarath2009/noc"
+  },
+  "author": "Sarath Chandra",
+  "contributors": [
+    "Sarath Chandra <rysarath2009@gmail.com>"
+  ],
+  "license": "MIT"
+}

@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>NOC</title>
+    <meta http-equiv='Content-Type' content='text/html; charset=utf-8' />
+    <script src="http://html2canvas.hertzen.com/dist/html2canvas.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.2/jspdf.min.js"></script>
+    <style type='text/css'>
+        #choiceDiv {
+            position: absolute;
+            top: 0;
+            left: 650px;
+            font-size: 18px;
+            width: 650px;
+        }
+
+        #parent {
+            background: #FFFFFF;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Helvetica, Arial, Sans-Serif;
+            width: 595px;
+            height: 775px;
+            font-size: 12px;
+        }
+
+        #header {
+            background: #303E6F;
+            height: 5.5%;
+            width: 95%;
+            margin-left: 2.5%;
+            font-size: 15px;
+            color: white;
+            text-align: center;
+        }
+
+        #content {
+            height: 85%;
+            width: 95%;
+        }
+
+        #descSubLeft,
+        #descSubRight {
+            width: 45%;
+        }
+
+        #subContentWrapper>#descSubRight {
+            margin-top: -7%;
+        }
+
+        #leftContent,
+        #leftSubContent,
+        #leftSignContent {
+            width: 56%;
+            margin-top: 1%;
+        }
+
+
+        #rightContent,
+        #rightSubContent,
+        #rightSignContent {
+            width: 40%;
+            margin-top: 1%;
+        }
+
+        #leftSignContent {
+            width: 60%;
+            margin-left: -15%;
+        }
+
+        #rightSignContent {
+            width: 65%;
+            margin-top: -4.5% !important;
+            margin-left: 110px;
+        }
+
+        #signContentWrapper:first-child {
+            height: 40px;
+        }
+
+        #subContentWrapper {
+            width: 63%;
+        }
+
+        #remarksContent:first-child {
+            font-size: 10px;
+            font-weight: bold;
+        }
+
+        #signContentWrapper {
+            text-align: center;
+        }
+
+        #subContentWrapper:nth-child(1) {
+            float: right;
+        }
+
+        #rightContent {
+            margin-left: 320px;
+            position: absolute;
+            top: 30px;
+        }
+
+        #contentData {
+            clear: both;
+        }
+
+        #signContent {
+            width: 50%;
+        }
+
+        #rightSubContent,
+        #descSubRight,
+        #rightSignContent {
+            margin-left: 185px;
+            margin-top: -5%;
+        }
+
+        #rightContent>#contentData>#rightSubContent {
+            margin-top: -3%;
+        }
+
+        #descDiv {
+            font-weight: bold;
+            margin-left: 6%;
+        }
+
+        #descSubLeft {
+            font-weight: bold;
+        }
+
+        #ignoreRight {
+            width: 100%;
+        }
+
+        #ignoreRightMargin {
+            width: 100%;
+            margin-top: 8%;
+        }
+
+        #remarksDiv {
+            margin-top: 150px;
+            margin-left: -25px;
+        }
+
+        #remarksWrapper:last-child {
+            margin-top: 2%;
+        }
+
+        #rightContent>#contentData:nth-child(8) {
+            font-size: 11px;
+        }
+
+        #signUpload {
+            background-image: url(./sign_alt_white.jpg);
+            width: 400px;
+            height: 200px;
+            transform: scale(0.53);
+            background-repeat: no-repeat;
+            margin-top: -14%;
+            margin-left: 1.2%;
+            position: absolute;
+        }
+
+        #footer {
+            background-image: url(./sign_white.jpg);
+            position: absolute;
+            width: 400px;
+            height: 200px;
+            transform: scale(0.7);
+            background-position: right;
+            background-repeat: no-repeat;
+            margin-left: 254px;
+            margin-top: -3%;
+        }
+
+        #imageDiv {
+            position: absolute;
+            background-image: url(./apGovtLogo.png);
+            background-position: center;
+            background-repeat: no-repeat;
+            width: 595px;
+            height: 842px;
+            opacity: 0.3;
+            transform: scale(0.8);
+            margin-left: 20px;
+            margin-top: -50px;
+        }
+
+        #remarksDiv {
+            width: 100%;
+        }
+
+        #leftRemarksDiv {
+            width: 15%;
+        }
+
+        #rightRemarksDiv {
+            width: 80%;
+            margin-top: -3%;
+            margin-left: 55px;
+        }
+
+        #descSubRight,
+        #rightSignContent {
+            margin-left: 110px;
+        }
+
+        #printWrapper {
+            width: 100%;
+            text-align: center;
+        }
+
+        #inputData {
+            width: 98%;
+        }
+
+        #nocBtn {
+            position: absolute;
+            margin-left: 5%;
+            margin-top: 3%;
+        }
+
+        #info {
+            font-weight: bold;
+            margin-bottom: 5%;
+        }
+
+        .choiceContent {
+            font-size: 22px;
+        }
+
+        #downloadBtn {
+            position: absolute;
+            margin-left: 25%;
+            margin-top: 3%;
+        }
+    </style>
+</head>
+
+<body onload="loadNOC()" crossOrigin="*">
+    <div id='parent'>
+        <div id='imageDiv' crossOrigin="*"></div>
+        <div id='header'>
+            <div>Government of Andhra Pradesh</div>
+            <div>Transport Department</div>
+        </div>
+        <div id='content'>
+            <div id='leftContent'> </div>
+            <div id='rightContent'></div>
+            <div id='printDiv'>
+                <div id='printWrapper'>
+                    <span>Print</span>
+                    <span>Close</span>
+                </div>
+            </div>
+            <div id='footer' crossOrigin="*"></div>
+        </div>
+    </div>
+    <div id='choiceDiv'>
+        <div class='choiceContent' id='info'>NOTE: Please Zoom out to 80% to take the screenshot for printout.</div>
+        <div class='choiceContent'>
+            <textarea class='choiceContent' id="inputData" rows='28'>Enter text here...</textarea>
+            <button class='choiceContent' id="nocBtn" onclick="generateNOC()">Generate NOC</button>
+            <button class='choiceContent' id='downloadBtn' onclick="downloadNOC(this);">Download</button>
+        </div>
+        <div class='choiceContent'>
+            <form name="bgRadio">
+                <label>Please Select the Background Color: </label>
+                <input type="radio" name="bgColor" value="#B3B4AE" onclick="updateBG(this);">Grey
+                <input type="radio" name="bgColor" value="#FFFFFF" onclick="updateBG(this);">Normal
+                <input type="radio" name="bgColor" value="#000000" onclick="updateBG(this);">B&W
+            </form>
+        </div>
+    </div>
+    <div id='canvasDiv' crossOrigin="*"></div>
+    <script type='text/javascript'>
+        function downloadNOC(el) {
+            html2canvas(document.querySelector("#parent")).then(canvas => {
+                document.getElementById('canvasDiv').appendChild(canvas);
+                setTimeout(function () {
+                    var canvas = document.getElementById('canvasDiv');
+
+                    var dataURL = canvas.children[0].toDataURL();
+
+                    var pdf = new jsPDF("1", "mm", "a4");
+                    var imgData = canvas.children[0].toDataURL('image/jpeg', 1.0);
+                    pdf.addImage(dataURL, 'JPEG', 10, 10, 595 / 2.98, 775 / 2.5);
+
+                    pdf.save("download.pdf");
+                    document.getElementById('canvasDiv').innerHTML = '';
+                    document.getElementById('footer').setAttribute("style", "display:block");
+                    document.getElementById('imageDiv').setAttribute("style", "display:block");
+                }, 250);
+            });
+        }
+        function generateNOC() {
+            loadNOC(document.getElementById('inputData').value);
+        }
+        function updateBG(value) {
+            document.getElementById('parent').setAttribute("style", "background:" + value.value);
+            document.getElementById('imageDiv').setAttribute("style", "background-image:url(./apGovtLogo.png)");
+            document.getElementById('header').setAttribute("style", "background:#303E6F");
+            if (value.value === '#B3B4AE') {
+                document.getElementById('footer').setAttribute("style", "background-image:url(./sign.jpg)");
+                document.getElementById('signUpload').setAttribute("style", "background-image:url(./sign_alt.jpg)");
+            } else if (value.value === '#FFFFFF') {
+                document.getElementById('footer').setAttribute("style", "background-image:url(./sign_white.jpg)");
+                document.getElementById('signUpload').setAttribute("style", "background-image:url(./sign_alt_white.jpg)");
+            } else {
+                document.getElementById('parent').setAttribute("style", "background:#FFFFFF");
+                document.getElementById('footer').setAttribute("style", "background-image:url(./sign_bw.jpg)");
+                document.getElementById('signUpload').setAttribute("style", "background-image:url(./sign_alt_bw.jpg)");
+                document.getElementById('imageDiv').setAttribute("style", "background-image:url(./apGovtLogo_bw.png)");
+                document.getElementById('header').setAttribute("style", "background:#000000");
+            }
+        }
+        function loadNOC(inputData) {
+            try {
+                if (!inputData) {
+                    document.bgRadio.bgColor[1].checked = true;
+
+                    inputData = {
+                        'nocIssuedTo': 'CHENNAI SHOLINGANALLUR TN IN',
+                        'nocIssuedDate': '08/20/2018',
+                        'leftContent': [{
+                            'key': '1. Registration Number',
+                            'value': 'AP03BP0303'
+                        },
+                        {
+                            'key': '2. Vehicle Class',
+                            'value': 'Motor Car'
+                        },
+                        {
+                            'key': '3. Registered Owner',
+                            'value': 'Name'
+                        }, {
+                            'key': '4. S/D/W of',
+                            'value': 'Name'
+                        }, {
+                            'key': '5. Present Address',
+                            'value': '1-1-1\a<br/>Asadds Nagar<br/>Asasdfd Edfd<br/>Sdsdsdsds<br/>Sytyt<br/>Andhra Pradesh'
+                        },
+                        {
+                            'key': '6. Date of Registration',
+                            'value': '02/04/2015'
+                        },
+                        {
+                            'detail': 'DETAILED DESCRIPTION',
+                        },
+                        {
+                            'key': '7. Vehicle Class',
+                            'value': 'Motor Car'
+                        },
+                        {
+                            'key': '8. Makers Name',
+                            'value': 'HYUNDAI MOTORS INDIA'
+                        },
+                        {
+                            'key': '9. Body Type',
+                            'value': 'Sedan'
+                        },
+                        {
+                            'key': '10. Month & Year of Manufacture',
+                            'value': '02/2015'
+                        },
+                        {
+                            'key': '11. No. of Cylinder',
+                            'value': '4'
+                        },
+                        {
+                            'key': '12. Chassis Number',
+                            'value': 'ABCD9892732738273827'
+                        },
+                        {
+                            'key': '13. Engine Number',
+                            'value': 'S233dfd34fgfdfd'
+                        },
+                        {
+                            'key': '14. Fuel Used',
+                            'value': 'PETROL'
+                        },
+                        {
+                            'key': '15. Horse Power',
+                            'value': '1197'
+                        },
+                        {
+                            'key': '16. Cubic Capacity',
+                            'value': '1197'
+                        },
+                        {
+                            'key': '17. Makers Classification',
+                            'value': 'XCENT-PETROL'
+                        },
+                        {
+                            'key': '18. Wheel Base',
+                            'value': '2425'
+                        },
+                        {
+                            'key': '19. Seating Capacity',
+                            'value': '5'
+                        },
+                        {
+                            'key': '20. Unladen Weight',
+                            'value': '1018'
+                        },
+                        {
+                            'key': '21. Color or Colour of Body',
+                            'value': 'SLEEK SILVER'
+                        },
+                        {
+                            'key': '22. Gross Vehicle Weight',
+                            'value': '1018'
+                        },
+                        {
+                            'ignoreRight': true,
+                            'key': '23. Number, Tyre Description Of Size Of Tyre',
+                        },
+                        {
+                            'ignoreRight': true,
+                            'subContent': [{
+                                'key': 'Front Axle',
+                                'value': '0'
+                            },
+                            {
+                                'key': 'Rear Axle',
+                                'value': '0'
+                            },
+                            {
+                                'key': 'Any Other Axle',
+                                'value': '0'
+                            }, {
+                                'key': 'Tandem Axle',
+                                'value': '0'
+                            }],
+                        }],
+                        'rightContent': [{
+                            'key': '24. registered Axie Weight s(Kgs)',
+                        },
+                        {
+                            'key': 'Front Axie',
+                        },
+                        {
+                            'key': 'Rear Axie',
+                        },
+                        {
+                            'key': 'Any Other Axie',
+                        },
+                        {
+                            'key': 'Tandem Axie',
+                        }, {
+                            'key': '25. Tax Paid (Rs.)',
+                            'value': '81860.00'
+                        }, {
+                            'key': '26. Tax valid till',
+                            'value': '01/04/2030'
+                        }, {
+                            'key': 'This Certificate is valid from 04/08/2018 to 03/08/2033',
+                            'ignoreRight': true,
+                            'applyMargin': true
+                        }]
+                    };
+
+                    var str = JSON.stringify(inputData, null, 4);
+                    document.getElementById('inputData').value = str;
+                } else {
+                    inputData = JSON.parse(inputData);
+                }
+
+                var div = document.getElementById('leftContent'), leftContent = '', rightContent = '';
+                for (var i = 0; i < inputData.leftContent.length; i++) {
+                    if (inputData.leftContent[i].ignoreRight && !inputData.leftContent[i].subContent) {
+                        leftContent += "<div id='contentData'><div id='ignoreRight'>" + inputData.leftContent[i].key + "</div></div>";
+                    } else if (inputData.leftContent[i].ignoreRight && inputData.leftContent[i].subContent) {
+                        var subContent = "<div id='contentData'><div id='ignoreRight'>";
+                        for (var j = 0; j < inputData.leftContent[i].subContent.length; j += 2) {
+                            subContent += "<div id='subContentData'><div id='subContentWrapper'><div id='descSubLeft'>"
+                                + inputData.leftContent[i].subContent[j].key +
+                                "</div><div id='descSubRight'>" +
+                                inputData.leftContent[i].subContent[j].value + "</div></div>";
+                            if (inputData.leftContent[i].subContent[j + 1]) {
+                                subContent += "<div id='subContentWrapper'><div id='descSubLeft'>"
+                                    + inputData.leftContent[i].subContent[j + 1].key +
+                                    "</div><div id='descSubRight'>" + inputData.leftContent[i].subContent[j + 1].value +
+                                    "</div></div></div>";
+                            } else {
+                                leftCsubContentontent += "</div>";
+                            }
+                        }
+                        subContent += "</div></div>";
+                        leftContent += subContent;
+                    } else if (inputData.leftContent[i].detail) {
+                        leftContent += "<div id='contentData'><div><div id='descDiv'>" + inputData.leftContent[i].detail + "</div></div></div>";
+                    } else {
+                        leftContent += "<div id='contentData'><div id='leftSubContent'>" +
+                            inputData.leftContent[i].key;
+                        if (inputData.leftContent[i].value) {
+                            leftContent += "</div><div id='rightSubContent'>" +
+                                inputData.leftContent[i].value +
+                                "</div></div>";
+                        } else {
+                            leftContent += "</div>";
+                        }
+                    }
+                }
+                div.innerHTML = leftContent;
+                div = document.getElementById('rightContent');
+
+                for (var i = 0; i < inputData.rightContent.length; i++) {
+                    if (inputData.rightContent[i].ignoreRight && !inputData.rightContent[i].applyMargin && !inputData.rightContent[i].subContent) {
+                        rightContent += "<div id='contentData'><div id='ignoreRight'>" + inputData.rightContent[i].key + "</div></div>";
+                    } else if (inputData.rightContent[i].ignoreRight && inputData.rightContent[i].applyMargin) {
+                        rightContent += "<div id='contentData'><div id='ignoreRightMargin'>" + inputData.rightContent[i].key + "</div></div>";
+                    } else if (inputData.rightContent[i].detail) {
+                        rightContent += "<div id='contentData'><div id='leftSubContent'><div id='descDiv'>" + inputData.rightContent[i].detail + "</div></div></div>";
+                    } else {
+                        rightContent += "<div id='contentData'><div id='leftSubContent'>" +
+                            inputData.rightContent[i].key;
+                        if (inputData.rightContent[i].value) {
+                            rightContent += "</div><div id='rightSubContent'>" + inputData.rightContent[i].value +
+                                "</div></div>";
+                        } else {
+                            rightContent += "</div></div>";
+                        }
+                    }
+                }
+                rightContent += "<div id='signContent'>" +
+                    "<div id='signContentWrapper'><div id='si'></div></div>" +
+                    "<div id='signContentWrapper'><div id='leftSignContent'>Signature of Owner</div><div id='signUpload'></div></div>" +
+                    "<div id='signContentWrapper'><div id='leftSignContent'>Date " + inputData.nocIssuedDate + "</div></div>"
+                    + "</div>";
+                rightContent += "<div id='remarksDiv'>" +
+                    "<div id='leftRemarksDiv'>Remarks:</div>" +
+                    "<div id='rightRemarksDiv'><div id='remarksWrapper'>" +
+                    "<div id='remarksContent'>NOC ISSUED TO " + inputData.nocIssuedTo + "</div>" +
+                    "<div id='remarksContent'>" + inputData.nocIssuedDate + "</div></div><div id='remarksWrapper'>" +
+                    "<div id='remarksContent'>Transaction Type: Issue of NOC</div>" +
+                    "<div id='remarksContent'>Transaction Date: " + inputData.nocIssuedDate + "</div>" +
+                    "</div>" + "</div></div>";
+
+                div.innerHTML = rightContent;
+
+                document.body.scrollTop = document.documentElement.scrollTop = 0;
+            } catch (e) {
+                alert("Error in the Input Json: " + e);
+            }
+        }
+    </script>
+</body>
+
+</html>
